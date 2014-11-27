@@ -37,13 +37,9 @@ module.exports = function (grunt) {
         watch: {
             js: {
                 files: ['<%= appConfig.app %>/**/*.js'],
-                tasks: ['newer:jshint:all'],
                 options: {
                     livereload: '<%= connect.options.livereload %>'
                 }
-            },
-            gruntfile: {
-                files: ['Gruntfile.js']
             },
             livereload: {
                 options: {
