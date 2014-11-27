@@ -1,0 +1,9 @@
+{
+    "name": "pizzaweb",
+    "version": "0.1.0",
+    "description": "pizzaweb app",
+    "repository": "",
+    "dependencies": {},
+    "devDependencies": {},
+    "appPath": "src"
+}
