@@ -1,5 +1,9 @@
 # PizzaWEB
 
-## Initialization
+## Add bootstrap, angular, etc..
 
-npm install grunt grunt-cli bower connect-modrewrite grunt-contrib-connect grunt-contrib-watch time-grunt load-grunt-tasks --save-dev
+bower install bootstrap angularjs angular-bootstrap
+
+## Add navigation
+
+update: index.html
