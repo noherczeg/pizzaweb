@@ -3,16 +3,17 @@
 
     angular
         .module('pizzaweb', [
-            'ui.bootstrap', 'ui.router', 'pizzaweb.core', 'pizzaweb.home', 'pizzaweb.menu', 'pizzaweb.about'
+            'pizzaweb.core', 'pizzaweb.home', 'pizzaweb.menu', 'pizzaweb.about'
         ])
 
         .config(config)
         .run(run);
 
-    config.$inject = ['$stateProvider', '$locationProvider'];
+    config.$inject = ['$stateProvider', '$locationProvider', '$httpProvider'];
 
-    function config($stateProvider, $locationProvider) {
+    function config($stateProvider, $locationProvider, $httpProvider) {
         $locationProvider.html5Mode(true).hashPrefix('!');
+        $httpProvider.defaults.withCredentials = true;
 
         $stateProvider
             .state('pizza', {

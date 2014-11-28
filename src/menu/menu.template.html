@@ -1,13 +1,16 @@
 <section data-ng-controller="menu as vm">
     <h2>List of menus:</h2>
 
+    <!-- Search bar -->
     <div class="pull-right col-md-4">
         <div class="input-group input-group-sm">
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
             <input type="text" ng-model="vm.search" class="form-control" placeholder="Search">
         </div>
     </div>
+    <!-- /Search bar -->
 
+    <!-- Table -->
     <table class="table table-hover table-striped">
         <thead>
             <tr>
@@ -24,6 +27,9 @@
             </tr>
         </tbody>
     </table>
+    <!-- /Table -->
+
+    <!-- Pagination -->
     <div class="pull-right col-md-6">
         <button class="btn btn-primary" ng-disabled="vm.pagination.currentPage == 0" ng-click="vm.pagination.currentPage=vm.pagination.currentPage-1">
             Previous
@@ -33,4 +39,34 @@
             Next
         </button>
     </div>
+    <br><br><br>
+    <!-- /Pagination -->
+
+    <div ng-show="vm.postSuccess" class="alert alert-success" role="alert">Product saved!</div>
+
+    <!-- Submit Form -->
+    <div class="col-md-6">
+        <h4>Submit Product:</h4>
+        <form name="productPostForm">
+            <div class="form-group">
+                <label for="productName">Name</label>
+                <input type="text" class="form-control" name="productName" id="productName" placeholder="name of product" required ng-model="vm.newProduct.name" ng-minlength="3" ng-maxlength="20">
+                <div ng-messages="productPostForm.productName.$error" style="color:maroon">
+                    <span ng-message="required" class="label label-danger">You did not enter a name</span >
+                    <span ng-message="minlength" class="label label-danger">The given name is too short</span >
+                    <span ng-message="maxlength" class="label label-danger">The given name is too long</span >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Price</label>
+                <input type="number" class="form-control" name="productPrice" id="productPrice" placeholder="500" required ng-model="vm.newProduct.price">
+                <div ng-messages="productPostForm.productPrice.$error" style="color:maroon">
+                    <span ng-message="required" class="label label-danger">Product price is required!</span >
+                </div>
+            </div>
+            <a href="" ng-disabled="productPostForm.$invalid" ng-click="vm.postProduct()" type="submit" class="btn btn-default">Submit</a>
+        </form>
+    </div>
+    <!-- /Submit Form -->
+
 </section>

@@ -45,12 +45,17 @@
         };
 
         function submitProduct(product) {
-            return $http.post(_API_URL + 'products', product).success(function(result) {
-                    console.log('Product uploaded.');
-                    return result.data;
-                }).error(function (error) {
-                    console.log('XHR Failed for submitProduct.' + error.data);
-                });
+            return $http.post(_API_URL + 'products', product)
+                .then(postComplete)
+                .catch(postFailed);
+
+            function postComplete(response) {
+                return response.data;
+            }
+
+            function postFailed(error) {
+                console.log('XHR Failed for submitProduct.' + error.data);
+            }
         };
     }
 
