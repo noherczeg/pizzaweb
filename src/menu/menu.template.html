@@ -1,3 +1,36 @@
-<section data-ng-controller="home as vm">
-    <p>This is the menu template</p>
+<section data-ng-controller="menu as vm">
+    <h2>List of menus:</h2>
+
+    <div class="pull-right col-md-4">
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" ng-model="vm.search" class="form-control" placeholder="Search">
+        </div>
+    </div>
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in vm.products | filter:vm.search | paginationStartFrom:vm.pagination.currentPage*vm.pagination.pageSize | limitTo:vm.pagination.pageSize">
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pull-right col-md-6">
+        <button class="btn btn-primary" ng-disabled="vm.pagination.currentPage == 0" ng-click="vm.pagination.currentPage=vm.pagination.currentPage-1">
+            Previous
+        </button>
+        {{vm.pagination.currentPage+1}}/{{vm.numberOfPages()}}
+        <button class="btn btn-primary" ng-disabled="vm.numberOfPages() == 0 || (vm.pagination.currentPage + 1) == vm.numberOfPages()" ng-click="vm.pagination.currentPage=vm.pagination.currentPage+1">
+            Next
+        </button>
+    </div>
 </section>

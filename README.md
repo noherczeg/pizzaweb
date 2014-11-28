@@ -1,8 +1,8 @@
 # PizzaWEB
 
-## wiredep
+## listing and filters
 
-- npm install grunt-wiredep --save-dev
-- add wiredep task to Gruntfile.js
-- add bower to watch task in Gruntfile.js
-- add comments to index.html (top and bottom as well), remove content between them. Restart server, check html :)
+- create filter in /src/core/pagination
+- include filter in index.html
+- add rest features to menu service
+- update template and controller
