@@ -13,7 +13,6 @@
 
     function config($stateProvider, $locationProvider, $httpProvider) {
         $locationProvider.html5Mode(true).hashPrefix('!');
-        $httpProvider.defaults.withCredentials = true;
 
         $stateProvider
             .state('pizza', {
