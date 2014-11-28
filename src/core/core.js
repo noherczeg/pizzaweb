@@ -3,7 +3,7 @@
 
     angular
         .module('pizzaweb.core', [
-            'ui.bootstrap', 'ui.router'
+            'ui.bootstrap', 'ui.router', 'pizzaweb.core.language'
         ]);
 
 })();

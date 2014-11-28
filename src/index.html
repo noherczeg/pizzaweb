@@ -10,6 +10,8 @@
 
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
 
+        <link rel="stylesheet" href="app.css" />
+
     </head>
     <body ng-controller="AppController">
         <!--[if lt IE 8]>
@@ -19,23 +21,36 @@
         <div class="container">
             <div class="header">
                 <ul class="nav nav-pills pull-right">
-                    <li ui-sref-active="active"><a ui-sref="pizza.home">home</a></li>
-                    <li ui-sref-active="active"><a ui-sref="pizza.menu">menu</a></li>
-                    <li ui-sref-active="active"><a ui-sref="pizza.about">about</a></li>
+                    <li ui-sref-active="active"><a ui-sref="pizza.home">{{ 'home' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="pizza.menu">{{ 'menu' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="pizza.about">{{ 'about' | translate }}</a></li>
                 </ul>
                 <h3 class="text-muted">PizzaWEB</h3>
             </div>
 
             <div class="content" ui-view></div>
+
         </div>
+
+        <footer class="footer">
+            <div class="container">
+                <button class="btn-xs btn" ng-class="{'btn-success': activeLanguage == 'en_US'}" ng-click="changeLanguage('en_US')">english</button>
+                <button class="btn-xs btn" ng-class="{'btn-success': activeLanguage == 'hu_HU'}" ng-click="changeLanguage('hu_HU')">magyar</button>
+            </div>
+        </footer>
 
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-translate/angular-translate.js"></script>
+        <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 
         <script src="app.js"></script>
         <script src="app.controller.js"></script>
         <script src="core/core.js"></script>
+        <script src="core/language/language.js"></script>
+        <script src="core/language/language.service.js"></script>
         <script src="home/home.js"></script>
         <script src="home/home.controller.js"></script>
         <script src="menu/menu.js"></script>

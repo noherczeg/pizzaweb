@@ -5,9 +5,12 @@
         .module('pizzaweb')
         .controller('AppController', AppController);
 
-    AppController.$inject = ['$scope'];
+    AppController.$inject = ['$scope', 'languageService'];
 
-    function AppController($scope) {
+    function AppController($scope, languageService) {
+        $scope.changeLanguage = function (langKey) {
+            languageService.changeLanguage(langKey);
+        }
     }
 
 })();
