@@ -1,9 +1,14 @@
 # PizzaWEB
 
-## Add bootstrap, angular, etc..
+## add ui-router
 
-bower install bootstrap angularjs angular-bootstrap
+bower install angular-ui-router --save
 
-## Add navigation
+## Add angular app
 
-update: index.html
+- add files to /src
+- folder structure
+- modules (getter vs setter)
+- core module
+- ui-router (states, ui-sref, ui-sref-active)
+- controller as syntax

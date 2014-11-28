@@ -1,9 +1,14 @@
 {
-    "name": "pizzaweb",
-    "version": "0.1.0",
-    "description": "pizzaweb app",
-    "repository": "",
-    "dependencies": {},
-    "devDependencies": {},
-    "appPath": "src"
+  "name": "pizzaweb",
+  "version": "0.1.0",
+  "description": "pizzaweb app",
+  "repository": "",
+  "dependencies": {
+    "angularjs": "~1.3.4",
+    "angular-bootstrap": "~0.12.0",
+    "bootstrap": "~3.3.1",
+    "angular-ui-router": "~0.2.13"
+  },
+  "devDependencies": {},
+  "appPath": "src"
 }
