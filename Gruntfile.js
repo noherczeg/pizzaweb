@@ -35,6 +35,10 @@ module.exports = function (grunt) {
         },
 
         watch: {
+            bower: {
+                files: ['bower.json'],
+                tasks: ['wiredep']
+            },
             js: {
                 files: ['<%= appConfig.app %>/**/*.js'],
                 options: {
@@ -49,11 +53,23 @@ module.exports = function (grunt) {
                     '<%= appConfig.app %>/**/*.html', '<%= appConfig.app %>/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             }
+        },
+
+        wiredep: {
+            app: {
+                src: ['<%= appConfig.app %>/index.html'],
+                ignorePath: /\.\.\//,
+                exclude: [
+                    'bower_components/angularjs/angular.js',
+                    'bower_components/bootstrap/dist/js/bootstrap.js'
+                ]
+            }
         }
     });
 
     grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
         grunt.task.run([
+            'wiredep',
             'connect:livereload',
             'watch'
         ]);
