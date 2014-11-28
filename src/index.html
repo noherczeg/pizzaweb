@@ -36,8 +36,8 @@
 
         <footer class="footer">
             <div class="container">
-                <button class="btn-xs btn" ng-class="{'btn-success': activeLanguage == 'en_US'}" ng-click="changeLanguage('en_US')">english</button>
-                <button class="btn-xs btn" ng-class="{'btn-success': activeLanguage == 'hu_HU'}" ng-click="changeLanguage('hu_HU')">magyar</button>
+                <button class="btn-xs btn" ng-click="changeLanguage('en_US')">english <i ng-show="activeLanguage == 'en_US'" class="glyphicon glyphicon-ok"></i></button>
+                <button class="btn-xs btn" ng-click="changeLanguage('hu_HU')">magyar <i ng-show="activeLanguage == 'hu_HU'" class="glyphicon glyphicon-ok"></i></button>
             </div>
         </footer>
 
