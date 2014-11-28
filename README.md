@@ -2,13 +2,7 @@
 
 ## add ui-router
 
-bower install angular-ui-router --save
+- bower install
 
-## Add angular app
-
-- add files to /src
-- folder structure
-- modules (getter vs setter)
-- core module
-- ui-router (states, ui-sref, ui-sref-active)
-- controller as syntax
+## Run the app
+- grunt serve
