@@ -12,7 +12,10 @@
             .state('pizza.about', {
                 url: '/about',
                 templateUrl: 'about/about.template.html',
-                controller: 'about'
+                controller: 'about',
+                data: {
+                    pageTitle: 'About'
+                }
             });
     }
 

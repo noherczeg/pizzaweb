@@ -12,7 +12,10 @@
             .state('pizza.home', {
                 url: '/',
                 templateUrl: 'home/home.template.html',
-                controller: 'home'
+                controller: 'home',
+                data: {
+                    pageTitle: 'Home'
+                }
             });
     }
 

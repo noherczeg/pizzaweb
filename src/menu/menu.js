@@ -12,7 +12,10 @@
             .state('pizza.menu', {
                 url: '/menu',
                 templateUrl: 'menu/menu.template.html',
-                controller: 'menu'
+                controller: 'menu',
+                data: {
+                    pageTitle: 'Menu'
+                }
             });
     }
 
