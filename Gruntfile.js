@@ -27,7 +27,8 @@ module.exports = function (grunt) {
                         return [
                             modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.gif|\\.woff|\\.ttf$ /index.html [L]']),
                             connect().use('/bower_components', connect.static('./bower_components')),
-                            connect.static(appConfig.app)
+                            connect.static(appConfig.app),
+                            connect.static(appConfig.dist)
                         ];
                     }
                 }
@@ -40,10 +41,8 @@ module.exports = function (grunt) {
                 tasks: ['wiredep']
             },
             js: {
-                files: ['<%= appConfig.app %>/**/*.js'],
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                }
+                files: ['<%= appConfig.app %>/**/*.ts'],
+                tasks: ['typescript:base']
             },
             livereload: {
                 options: {
@@ -64,11 +63,32 @@ module.exports = function (grunt) {
                     'bower_components/bootstrap/dist/js/bootstrap.js'
                 ]
             }
+        },
+
+        typescript: {
+            base: {
+                src: [
+                    '<%= appConfig.app %>/app.module.ts',
+                    '<%= appConfig.app %>/core/core.module.ts',
+                    '<%= appConfig.app %>/**/*.module.ts',
+                    '<%= appConfig.app %>/**/*.ts'
+                ],
+                dest: '<%= appConfig.dist %>/app.js',
+                options: {
+                    module: 'commonjs',
+                    target: 'es5',
+                    basePath: 'src',
+                    sourceMap: true,
+                    inlineSourceMap: true,
+                    declaration: true
+                }
+            }
         }
     });
 
     grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
         grunt.task.run([
+            'typescript:base',
             'wiredep',
             'connect:livereload',
             'watch'
