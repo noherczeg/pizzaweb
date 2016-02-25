@@ -1,5 +1,5 @@
 # PizzaWEB
 
-## Requirements
-- nodejs
-- npm
+- npm install
+- bower install
+- grunt

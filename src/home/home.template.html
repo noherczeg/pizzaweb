@@ -1,0 +1,14 @@
+﻿﻿<section data-ng-controller="home as vm">
+    <h1>Hello!</h1>
+
+    <p>Printing out test variable: {{vm.testVar}}</p><br>
+
+    <p>Testting translations:</p>
+
+    <ul>
+        <li>home: {{ vm.translateCtrlVars.home | translate }}</li>
+        <li>gogo: {{ 'gogo' | translate }}</li>
+    </ul>
+
+    <small>Controller as syntax FTW!</small>
+</section>

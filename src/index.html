@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" ng-app="pizzaweb">
+    <head>
+        <title>{{ pageTitle }}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Sample frontend app">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base href="/">
+
+        <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <!-- endbower -->
+
+        <link rel="stylesheet" href="app.css" />
+        <link rel="stylesheet" href="app.css" />
+
+    </head>
+    <body ng-controller="AppController">
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li ui-sref-active="active"><a ui-sref="pizza.home">{{ 'home' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="pizza.menu">{{ 'menu' | translate }}</a></li>
+                    <li ui-sref-active="active"><a ui-sref="pizza.about">{{ 'about' | translate }}</a></li>
+                </ul>
+                <h3 class="text-muted">PizzaWEB</h3>
+            </div>
+
+            <div class="content" ui-view></div>
+
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <button class="btn-xs btn" ng-click="changeLanguage('en_US')">english <i ng-show="activeLanguage == 'en_US'" class="glyphicon glyphicon-ok"></i></button>
+                <button class="btn-xs btn" ng-click="changeLanguage('hu_HU')">magyar <i ng-show="activeLanguage == 'hu_HU'" class="glyphicon glyphicon-ok"></i></button>
+            </div>
+        </footer>
+
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-translate/angular-translate.js"></script>
+        <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-locker/dist/angular-locker.min.js"></script>
+        <!-- endbower -->
+
+        <script src="app.js"></script>
+        <script src="app.controller.js"></script>
+        <script src="core/core.js"></script>
+        <script src="core/store/store.js"></script>
+        <script src="core/language/language.js"></script>
+        <script src="core/language/language.service.js"></script>
+        <script src="core/pagination/pagination.filter.js"></script>
+        <script src="home/home.js"></script>
+        <script src="home/home.controller.js"></script>
+        <script src="menu/menu.js"></script>
+        <script src="menu/menu.controller.js"></script>
+        <script src="menu/menu.service.js"></script>
+        <script src="about/about.js"></script>
+        <script src="about/about.controller.js"></script>
+
+    </body>
+</html>

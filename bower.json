@@ -1,9 +1,29 @@
 {
-    "name": "pizzaweb",
-    "version": "0.1.0",
-    "description": "pizzaweb app",
-    "repository": "",
-    "dependencies": {},
-    "devDependencies": {},
-    "appPath": "src"
+  "name": "pizzaweb",
+  "version": "0.2.0",
+  "description": "pizzaweb app",
+  "repository": "",
+  "dependencies": {
+    "angular": "1.4.5",
+    "angular-messages": "1.4.5",
+    "angular-bootstrap": "1.1.2",
+    "bootstrap": "~3.3.1",
+    "angular-ui-router": "0.2.18",
+    "angular-cookies": "1.4.5",
+    "angular-i18n": "1.4.5",
+    "angular-translate": "2.4.2",
+    "angular-translate-loader-static-files": "2.4.2",
+    "angular-sanitize": "1.4.5",
+    "angular-locker": "2.0.4"
+  },
+  "devDependencies": {},
+  "appPath": "src",
+  "resolutions": {
+    "angular": "1.4.5"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": "dist/css/bootstrap.css"
+    }
+  }
 }
