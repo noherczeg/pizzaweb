@@ -10,7 +10,6 @@ namespace app.menu {
         pagination: any;
         numberOfPages: () => number;
         postProduct: (product: IProduct) => ng.IPromise<boolean>;
-        getCategories: () => ng.IPromise<Array<ICategory>>;
         getProducts: () => ng.IPromise<Array<IProduct>>;
     }
 
@@ -24,18 +23,17 @@ namespace app.menu {
             currentPage: 0,
             pageSize: 4
         };
-        menuService: IMenuService;
+        menuService: IGetter<IProduct>;
         $filter: any;
         $scope: any;
 
         static $inject: Array<string> = ['MenuService', '$filter', '$scope'];
 
-        constructor(MenuService: IMenuService, $filter: any, $scope: any) {
+        constructor(MenuService: IGetter<IProduct>, $filter: any, $scope: any) {
             this.menuService = MenuService;
             this.$filter = $filter;
             this.$scope = $scope;
 
-            this.getCategories();
             this.getProducts();
         }
 
@@ -53,14 +51,6 @@ namespace app.menu {
                     // clears validation :)
                     self.$scope.productPostForm.$setPristine();
                     return self.postSuccess;
-                });
-        }
-        public getCategories(): ng.IPromise<Array<ICategory>> {
-            var self = this;
-            return this.menuService.getCategories()
-                .then((response: Array<ICategory>): Array<ICategory> => {
-                    self.categories = response;
-                    return self.categories;
                 });
         }
 
