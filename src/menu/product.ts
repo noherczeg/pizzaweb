@@ -1,7 +1,8 @@
 namespace app.menu {
     'use strict';
 
-    export interface IProduct extends app.core.services.Entity{
+    export interface IProduct {
+        id: number;
         name: string;
         price: number;
     }

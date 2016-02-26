@@ -25,17 +25,15 @@ namespace app.menu {
             pageSize: 4
         };
         menuService: IMenuService;
-        productService: app.core.services.ProductService;
         $filter: any;
         $scope: any;
 
-        static $inject: Array<string> = ['MenuService', '$filter', '$scope', 'ProductService'];
+        static $inject: Array<string> = ['MenuService', '$filter', '$scope'];
 
-        constructor(MenuService: IMenuService, $filter: any, $scope: any, ProductService: app.core.services.ProductService) {
+        constructor(MenuService: IMenuService, $filter: any, $scope: any) {
             this.menuService = MenuService;
             this.$filter = $filter;
             this.$scope = $scope;
-            this.productService = ProductService;
 
             this.getCategories();
             this.getProducts();
@@ -68,7 +66,7 @@ namespace app.menu {
 
         public getProducts(): ng.IPromise<Array<IProduct>> {
             var self = this;
-            return this.productService.getAll()
+            return this.menuService.getProducts()
                 .then((response: Array<IProduct>): Array<IProduct> => {
                     self.products = response;
                     return self.products;

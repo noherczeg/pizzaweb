@@ -71,31 +71,20 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        //
-        //ts: {
-        //    default : {
-        //        src: ['<%= appConfig.app %>/**/*.ts'],
-        //        out: 'dist/app.js',
-        //        options: {
-        //            declaration: true,
-        //            module: 'amd',
-        //            noImplicitAny: true,
-        //            sourceMap: true,
-        //            target: 'es5',
-        //            noExternalResolve: true
-        //        }
-        //    }
-        //},
 
         typescript: {
             default: {
                 src: [
+                    '<%= appConfig.app %>/app.module.ts',
+                    '<%= appConfig.app %>/core/core.module.ts',
+                    '<%= appConfig.app %>/**/*.module.ts',
                     '<%= appConfig.app %>/**/*.ts'
                 ],
-                dest: 'dist',
+                dest: 'dist/app.js',
                 options: {
                     noImplicitAny: true,
-                    sourceMap: false,
+                    sourceMap: true,
+                    declaration: true,
                     target: 'es5',
                     module: 'commonjs'
                 }
