@@ -1,7 +1,9 @@
-import {IProduct} from "../product/product";
+namespace app.menu {
+    'use strict';
 
-export interface ICategory {
-    id: number;
-    name: string;
-    products: Array<IProduct>;
+    export interface ICategory {
+        id: number;
+        name: string;
+        products: Array<IProduct>;
+    }
 }

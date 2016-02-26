@@ -1,5 +1,10 @@
-export interface IProduct {
-    id: number;
-    name: string;
-    price: number;
+namespace app.menu {
+    'use strict';
+
+    export interface IProduct {
+        id: number;
+        name: string;
+        price: number;
+    }
+
 }

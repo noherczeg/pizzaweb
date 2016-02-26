@@ -1,17 +1,25 @@
-(function() {
+namespace app.about {
     'use strict';
 
-    angular
-        .module('pizzaweb.about')
-        .controller('about', about);
-
-    function about() {
-        var vm = this;
-        vm.author = {
-            name: 'Norbert Csaba Herczeg',
-            position: 'software developer'
-        };
-        vm.project = 'angular sample app';
+    export interface IAdminVM {
+        author: Author;
+        project: string;
     }
 
-})();
+    export class AboutController implements IAdminVM{
+        author: Author = new Author('Norbert Csaba Herczeg', 'software developer');
+        project: string = 'angular sample app';
+
+        constructor () {}
+    }
+
+    export class Author {
+        private name: string;
+        private position: string;
+
+        constructor (name: string, position: string) {
+            this.name = name;
+            this.position = position;
+        }
+    }
+}

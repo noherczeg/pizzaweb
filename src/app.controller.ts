@@ -1,16 +1,17 @@
-(function() {
+namespace app {
     'use strict';
 
-    angular
-        .module('pizzaweb')
-        .controller('AppController', AppController);
+    export class AppController {
+        private languageService: any;
 
-    AppController.$inject = ['$scope', 'languageService'];
+        static $inject = ['$scope', 'languageService'];
 
-    function AppController($scope, languageService) {
-        $scope.changeLanguage = function (langKey) {
-            languageService.changeLanguage(langKey);
+        constructor (languageService: any) {
+            this.languageService = languageService;
         }
-    }
+        public changeLanguage (langKey: string): void {
+            this.languageService.changeLanguage(langKey);
+        }
 
-})();
+    }
+}

@@ -1,67 +1,80 @@
-(function() {
+namespace app.menu {
     'use strict';
 
-    angular
-        .module('pizzaweb.menu')
-        .controller('menu', menu);
+    export interface MenuVM {
+        search: string;
+        postSuccess: boolean;
+        products: Array<IProduct>;
+        newProduct: IProduct;
+        categories: Array<ICategory>;
+        pagination: any;
+        numberOfPages: () => number;
+        postProduct: (product: IProduct) => ng.IPromise<boolean>;
+        getCategories: () => ng.IPromise<Array<ICategory>>;
+        getProducts: () => ng.IPromise<Array<IProduct>>;
+    }
 
-    menu.$inject = ['menuService', '$filter', '$scope'];
-
-    function menu(menuService, $filter, $scope) {
-        var vm = this;
-        vm.search = '';
-        vm.postSuccess = false;
-        vm.products = [];
-        vm.newProduct = {};
-        vm.categories = [];
-        vm.pagination = {
+    export class MenuController implements MenuVM{
+        search: string = '';
+        postSuccess: boolean = false;
+        products: Array<app.menu.IProduct> = [];
+        newProduct: IProduct;
+        categories: Array<app.menu.ICategory> = [];
+        pagination: any  = {
             currentPage: 0,
             pageSize: 4
         };
+        menuService: IMenuService;
+        $filter: any;
+        $scope: any;
 
-        vm.numberOfPages = function(){
-            var myFilteredData = $filter('filter')(vm.products, vm.search);
-            return Math.ceil(myFilteredData.length/vm.pagination.pageSize);
+        static $inject: Array<string> = ['menuService', '$filter', '$scope'];
+
+        constructor(menuService: IMenuService, $filter: any, $scope: any) {
+            this.menuService = menuService;
+            this.$filter = $filter;
+            this.$scope = $scope;
+
+            this.getCategories();
+            this.getProducts();
         }
 
-        vm.postProduct = function(){
-            return menuService.submitProduct(vm.newProduct).then(function(data) {
-                // waits for response this way!
-                vm.postSuccess = true;
-                vm.newProduct = {};
-                // clears validation :)
-                $scope.productPostForm.$setPristine();
-                return vm.postSuccess;
-            });
+        public numberOfPages (): number {
+            var myFilteredData = this.$filter('filter')(this.products, this.search);
+            return Math.ceil(myFilteredData.length/this.pagination.pageSize);
         }
-
-        _activate();
-
-        ////////////
-
-        function _activate() {
-            getCategories().then(function() {
-                console.log('Fetched categories.');
-            });
-            getProducts().then(function() {
-                console.log('Fetched products.');
-            });
+        public postProduct(product: IProduct): ng.IPromise<boolean> {
+            var self = this;
+            return this.menuService.submitProduct(this.newProduct)
+                .then((response: ng.IHttpPromiseCallbackArg<IProduct>): boolean => {
+                    // waits for response this way!
+                    self.postSuccess = true;
+                    self.newProduct = null;
+                    // clears validation :)
+                    self.$scope.productPostForm.$setPristine();
+                    return self.postSuccess;
+                });
         }
-
-        function getCategories() {
-            return menuService.getCategories().then(function(data) {
-                    vm.categories = data;
-                    return vm.categories;
+        public getCategories(): ng.IPromise<Array<ICategory>> {
+            var self = this;
+            return this.menuService.getCategories()
+                .then((response: ng.IHttpPromiseCallbackArg<Array<ICategory>>): Array<ICategory> => {
+                    self.categories = response.data;
+                    return self.categories;
                 });
         }
 
-        function getProducts() {
-            return menuService.getProducts().then(function(data) {
-                    vm.products = data;
-                    return vm.products;
+        public getProducts(): ng.IPromise<Array<IProduct>> {
+            var self = this;
+            return this.menuService.getProducts()
+                .then((response: ng.IHttpPromiseCallbackArg<Array<IProduct>>): Array<IProduct> => {
+                    self.products = response.data;
+                    return self.products;
                 });
         }
-
     }
 
-})();
+    angular
+        .module('pizzaweb.menu')
+        .controller('menu', MenuController);
+}

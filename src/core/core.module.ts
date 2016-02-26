@@ -1,9 +1,17 @@
-(function() {
+namespace app.core {
     'use strict';
 
     angular
         .module('pizzaweb.core', [
-            'ui.bootstrap', 'ui.router', 'pizzaweb.core.language', 'ngMessages', 'ngSanitize', 'angular-locker'
-        ]);
-
-})();
+            'ui.bootstrap',
+            'ui.router',
+            'ngMessages',
+            'ngSanitize',
+            'angular-locker',
+            'pascalprecht.translate',
+            'pizzaweb.core.language',
+            'pizzaweb.core.pagination',
+            'pizzaweb.core.store'
+        ])
+        .filter('paginationStartFrom', app.core.pagination.PaginationStartFrom.filter);
+}

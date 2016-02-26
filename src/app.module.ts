@@ -1,44 +1,71 @@
 /// <reference path="../typings/browser.d.ts"/>
-(function() {
+
+namespace app {
     'use strict';
 
-    angular
-        .module('pizzaweb', [
-            'pizzaweb.core', 'pizzaweb.home', 'pizzaweb.menu', 'pizzaweb.about'
-        ])
-        .config(config)
-        .run(run);
+    class AppConfig {
+        private $stateProvider: angular.ui.IStateProvider;
+        private $locationProvider: angular.ILocationProvider;
 
-    config.$inject = ['$stateProvider', '$locationProvider'];
+        static $inject = ['$stateProvider', '$locationProvider'];
 
-    function config ($stateProvider, $locationProvider) {
-        $locationProvider.html5Mode(true).hashPrefix('!');
+        constructor ($stateProvider: angular.ui.IStateProvider, $locationProvider: angular.ILocationProvider) {
+            this.$stateProvider = $stateProvider;
+            this.$locationProvider = $locationProvider;
 
-        $stateProvider
-            .state('pizza', {
+            this.$locationProvider
+                .html5Mode(true)
+                .hashPrefix('!');
+
+            this.$stateProvider
+                .state('pizza', AppConfig.createRootState())
+                .state('otherwise', AppConfig.createFourOFourState());
+        }
+
+        private static createRootState(): angular.ui.IState {
+            return {
                 abstract: true,
                 template: '<ui-view/>',
                 controller: 'AppController'
-            })
-            .state('otherwise', {
+            };
+        }
+
+        private static createFourOFourState(): angular.ui.IState {
+            return {
                 url: '*path',
                 templateUrl: '404.html',
                 data: {
                     pageTitle: 'Page not found'
                 }
+            };
+        }
+
+    }
+
+    class AppRun {
+        private $rootScope: any;
+
+        static $inject = ['$rootScope'];
+
+        constructor ($rootScope: any) {
+            this.$rootScope = $rootScope;
+
+            var pageTitleSuffix = ' | PizzaWEB';
+
+            this.$rootScope.$on('$stateChangeSuccess', (event: angular.IAngularEvent, toState: angular.ui.IState) => {
+                if (angular.isDefined(toState.data.pageTitle)) {
+                    this.$rootScope.pageTitle = toState.data.pageTitle + pageTitleSuffix;
+                }
             });
+        }
+
     }
 
-    run.$inject = ['$rootScope'];
-
-    function run ($rootScope) {
-        var pageTitleSuffix = ' | PizzaWEB';
-
-        $rootScope.$on('$stateChangeSuccess', function (event, toState) {
-            if (angular.isDefined(toState.data.pageTitle)) {
-                $rootScope.pageTitle = toState.data.pageTitle + pageTitleSuffix;
-            }
-        });
-    }
-
-})();
+    angular
+        .module('pizzaweb', [
+            'pizzaweb.core', 'pizzaweb.home', 'pizzaweb.menu', 'pizzaweb.about'
+        ])
+        .controller('AppController', AppController)
+        .config(AppConfig)
+        .run(AppRun);
+}

@@ -1,15 +1,15 @@
-(function() {
+namespace app.core.pagination {
     'use strict';
 
-    angular
-        .module('pizzaweb.core')
-        .filter('paginationStartFrom', paginationStartFrom);
+    export class PaginationStartFrom {
 
-    function paginationStartFrom() {
-        return function(input, start) {
-            start = +start; //parse to int
-            return input.slice(start);
+        static $inject: Array<string> = [];
+
+        static filter(){
+            return (input: any, start: number) => {
+                start = +start; //parse to int
+                return input.slice(start);
+            }
         }
     }
-
-})();
+}

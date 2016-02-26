@@ -1,6 +1,7 @@
 'use strict';
 
 var modRewrite = require('connect-modrewrite');
+var webpack = require('webpack');
 
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
@@ -42,15 +43,21 @@ module.exports = function (grunt) {
             },
             js: {
                 files: ['<%= appConfig.app %>/**/*.ts'],
-                tasks: ['typescript:base']
+                tasks: ['clean:dist', 'typescript']
             },
             livereload: {
                 options: {
                     livereload: '<%= connect.options.livereload %>'
                 },
                 files: [
-                    '<%= appConfig.app %>/**/*.html', '<%= appConfig.app %>/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                    '<%= appConfig.app %>/**/*.html', '<%= appConfig.dist %>/{,*/}*.{js}'
                 ]
+            }
+        },
+
+        clean: {
+            dist: {
+                src: ["dist/*"]
             }
         },
 
@@ -64,23 +71,35 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        //
+        //ts: {
+        //    default : {
+        //        src: ['<%= appConfig.app %>/**/*.ts'],
+        //        out: 'dist/app.js',
+        //        options: {
+        //            declaration: true,
+        //            module: 'amd',
+        //            noImplicitAny: true,
+        //            sourceMap: true,
+        //            target: 'es5',
+        //            noExternalResolve: true
+        //        }
+        //    }
+        //},
 
         typescript: {
-            base: {
+            default: {
                 src: [
-                    '<%= appConfig.app %>/app.module.ts',
-                    '<%= appConfig.app %>/core/core.module.ts',
-                    '<%= appConfig.app %>/**/*.module.ts',
                     '<%= appConfig.app %>/**/*.ts'
                 ],
-                dest: '<%= appConfig.dist %>/app.js',
+                dest: 'dist',
                 options: {
-                    module: 'commonjs',
+                    noImplicitAny: true,
+                    sourceMap: false,
                     target: 'es5',
-                    basePath: 'src',
-                    sourceMap: true,
-                    inlineSourceMap: true,
-                    declaration: true
+                    module: 'commonjs',
+                    fast: 'always',
+                    comments: true
                 }
             }
         }
@@ -88,7 +107,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
         grunt.task.run([
-            'typescript:base',
+            'typescript',
             'wiredep',
             'connect:livereload',
             'watch'

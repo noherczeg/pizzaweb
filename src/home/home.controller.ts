@@ -1,18 +1,20 @@
-(function() {
+namespace app.home {
     'use strict';
 
-    angular
-        .module('pizzaweb.home')
-        .controller('home', home);
-
-    home.$inject = ['$scope'];
-
-    function home($scope) {
-        var vm = this;
-        vm.testVar = 'Test Variable in home controller!';
-        vm.translateCtrlVars = {
-            home: 'home'
-        }
+    export interface IHomeVM {
+        testVar: string;
+        translateCtrlVars: any;
     }
 
-})();
+    export class HomeController implements IHomeVM{
+        testVar: string;
+        translateCtrlVars: any;
+
+        constructor () {
+            this.testVar = 'Test Variable in home controller!';
+            this.translateCtrlVars = {
+                home: 'home'
+            }
+        }
+    }
+}
