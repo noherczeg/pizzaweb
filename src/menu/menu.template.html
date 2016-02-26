@@ -1,4 +1,4 @@
-<section data-ng-controller="menu as vm">
+<section data-ng-controller="Menu as vm">
     <h2>List of menus:</h2>
 
     <!-- Search bar -->
@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="product in vm.products | filter:vm.search | paginationStartFrom:vm.pagination.currentPage*vm.pagination.pageSize | limitTo:vm.pagination.pageSize">
+            <tr ng-repeat="product in vm.products | filter:vm.search | PaginationStartFrom:vm.pagination.currentPage*vm.pagination.pageSize | limitTo:vm.pagination.pageSize">
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }}</td>

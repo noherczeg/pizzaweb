@@ -1,32 +1,27 @@
 namespace app.about {
     'use strict';
 
-    class AboutConfig {
-        private $stateProvider: angular.ui.IStateProvider;
+    config.$inject = ['$stateProvider'];
 
-        static $inject = ['$stateProvider'];
+    function config($stateProvider: angular.ui.IStateProvider) {
+        $stateProvider
+            .state('pizza.about', createAboutState());
+    }
 
-        constructor ($stateProvider: angular.ui.IStateProvider) {
-            this.$stateProvider = $stateProvider;
-            this.$stateProvider
-                .state('pizza.about', AboutConfig.createAboutState());
-        }
-
-        private static createAboutState(): angular.ui.IState {
-            var state: angular.ui.IState = {};
-            state.url = '/about';
-            state.templateUrl = 'about/about.template.html';
-            state.controller = 'about';
-            state.data = {
-                pageTitle: 'About'
-            };
-            return state;
-        }
-
+    function createAboutState(): angular.ui.IState {
+        var state: angular.ui.IState = {};
+        state.url = '/about';
+        state.templateUrl = 'about/about.template.html';
+        state.controller = 'About';
+        state.data = {
+            pageTitle: 'About'
+        };
+        return state;
     }
 
     angular
         .module('pizzaweb.about', [])
-        .controller('about', AboutController)
-        .config(AboutConfig);
+        .config(config);
+
+
 }

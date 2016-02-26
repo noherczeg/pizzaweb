@@ -22,4 +22,8 @@ namespace app.about {
             this.position = position;
         }
     }
+
+    angular
+        .module('pizzaweb.about')
+        .controller('About', AboutController);
 }

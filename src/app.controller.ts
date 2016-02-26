@@ -4,14 +4,18 @@ namespace app {
     export class AppController {
         private languageService: any;
 
-        static $inject = ['$scope', 'languageService'];
+        static $inject = ['LanguageService'];
 
-        constructor (languageService: any) {
-            this.languageService = languageService;
+        constructor (LanguageService: app.core.language.ILanguageService) {
+            this.languageService = LanguageService;
         }
         public changeLanguage (langKey: string): void {
             this.languageService.changeLanguage(langKey);
         }
 
     }
+
+    angular
+        .module('pizzaweb')
+        .controller('AppController', AppController);
 }

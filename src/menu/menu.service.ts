@@ -39,4 +39,8 @@ namespace app.menu {
         }
 
     }
+
+    angular
+        .module('pizzaweb.menu')
+        .service('MenuService', MenuService);
 }

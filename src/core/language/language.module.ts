@@ -1,43 +1,30 @@
 namespace app.core.language {
     'use strict';
 
-    class LanguageConfig {
-        private $translateProvider: angular.translate.ITranslateProvider;
+    config.$inject = ['$translateProvider'];
 
-        static $inject = ['$translateProvider'];
-
-        constructor ($translateProvider: angular.translate.ITranslateProvider) {
-            this.$translateProvider = $translateProvider;
-            this.$translateProvider.useSanitizeValueStrategy('sanitizeParameters');
-            this.$translateProvider.useStaticFilesLoader(LanguageConfig.createLoaderOption());
-            this.$translateProvider.preferredLanguage('en_US');
-            this.$translateProvider.fallbackLanguage('hu_HU');
-        }
-
-        private static createLoaderOption(): angular.translate.IStaticFilesLoaderOptions {
-            return {prefix: 'assets/languages/', suffix: '.json'};
-        }
+    function config($translateProvider: angular.translate.ITranslateProvider) {
+        $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+        $translateProvider.useStaticFilesLoader(createLoaderOption());
+        $translateProvider.preferredLanguage('en_US');
+        $translateProvider.fallbackLanguage('hu_HU');
     }
 
-    class LanguageRun {
-        private languageService: ILanguageService;
-        private locker: angular.locker.ILockerService;
+    run.$inject = ['LanguageService', 'locker'];
 
-        static $inject = ['$translateProvider'];
+    function run(LanguageService: ILanguageService, locker: angular.locker.ILockerService) {
+        var lang = locker.get('ui-language');
+        var defaultLanguage = 'hu_HU';
+        LanguageService.changeLanguage((!lang) ? defaultLanguage : lang);
+    }
 
-        constructor (languageService: ILanguageService, locker: angular.locker.ILockerService) {
-            this.languageService = languageService;
-            this.locker = locker;
-
-            var lang = this.locker.get('ui-language');
-            var defaultLanguage = 'hu_HU';
-            this.languageService.changeLanguage((!lang) ? defaultLanguage : lang);
-        }
+    function createLoaderOption(): angular.translate.IStaticFilesLoaderOptions {
+        return {prefix: 'assets/languages/', suffix: '.json'};
     }
 
     angular
         .module('pizzaweb.core.language', [])
-        .config(LanguageConfig)
-        .service('languageService', LanguageService)
-        .run(LanguageRun);
+        .config(config)
+        .run(run);
+
 }

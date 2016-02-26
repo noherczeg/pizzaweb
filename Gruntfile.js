@@ -97,9 +97,7 @@ module.exports = function (grunt) {
                     noImplicitAny: true,
                     sourceMap: false,
                     target: 'es5',
-                    module: 'commonjs',
-                    fast: 'always',
-                    comments: true
+                    module: 'commonjs'
                 }
             }
         }

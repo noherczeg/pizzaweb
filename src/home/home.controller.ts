@@ -17,4 +17,8 @@ namespace app.home {
             }
         }
     }
+
+    angular
+        .module('pizzaweb.home')
+        .controller('Home', HomeController);
 }

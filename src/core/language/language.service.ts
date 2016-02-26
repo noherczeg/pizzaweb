@@ -26,4 +26,8 @@ namespace app.core.language {
         }
 
     }
+
+    angular
+        .module('pizzaweb.core.language')
+        .service('LanguageService', LanguageService);
 }

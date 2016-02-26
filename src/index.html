@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="app.css" />
 
     </head>
-    <body ng-controller="AppController">
+    <body ng-controller="AppController as aCtrl">
         <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -37,8 +37,8 @@
 
         <footer class="footer">
             <div class="container">
-                <button class="btn-xs btn" ng-click="changeLanguage('en_US')">english <i ng-show="activeLanguage == 'en_US'" class="glyphicon glyphicon-ok"></i></button>
-                <button class="btn-xs btn" ng-click="changeLanguage('hu_HU')">magyar <i ng-show="activeLanguage == 'hu_HU'" class="glyphicon glyphicon-ok"></i></button>
+                <button class="btn-xs btn" ng-click="aCtrl.changeLanguage('en_US')">english <i ng-show="activeLanguage == 'en_US'" class="glyphicon glyphicon-ok"></i></button>
+                <button class="btn-xs btn" ng-click="aCtrl.changeLanguage('hu_HU')">magyar <i ng-show="activeLanguage == 'hu_HU'" class="glyphicon glyphicon-ok"></i></button>
             </div>
         </footer>
 
@@ -59,6 +59,7 @@
         <script src="core/core.module.js"></script>
         <script src="home/home.module.js"></script>
         <script src="menu/menu.module.js"></script>
+        <script src="core/pagination/pagination.module.js"></script>
         <script src="about/about.module.js"></script>
         <script src="core/store/store.module.js"></script>
         <script src="core/language/language.module.js"></script>

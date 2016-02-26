@@ -12,6 +12,5 @@ namespace app.core {
             'pizzaweb.core.language',
             'pizzaweb.core.pagination',
             'pizzaweb.core.store'
-        ])
-        .filter('paginationStartFrom', app.core.pagination.PaginationStartFrom.filter);
+        ]);
 }

@@ -28,10 +28,10 @@ namespace app.menu {
         $filter: any;
         $scope: any;
 
-        static $inject: Array<string> = ['menuService', '$filter', '$scope'];
+        static $inject: Array<string> = ['MenuService', '$filter', '$scope'];
 
-        constructor(menuService: IMenuService, $filter: any, $scope: any) {
-            this.menuService = menuService;
+        constructor(MenuService: IMenuService, $filter: any, $scope: any) {
+            this.menuService = MenuService;
             this.$filter = $filter;
             this.$scope = $scope;
 
@@ -58,8 +58,8 @@ namespace app.menu {
         public getCategories(): ng.IPromise<Array<ICategory>> {
             var self = this;
             return this.menuService.getCategories()
-                .then((response: ng.IHttpPromiseCallbackArg<Array<ICategory>>): Array<ICategory> => {
-                    self.categories = response.data;
+                .then((response: Array<ICategory>): Array<ICategory> => {
+                    self.categories = response;
                     return self.categories;
                 });
         }
@@ -67,8 +67,8 @@ namespace app.menu {
         public getProducts(): ng.IPromise<Array<IProduct>> {
             var self = this;
             return this.menuService.getProducts()
-                .then((response: ng.IHttpPromiseCallbackArg<Array<IProduct>>): Array<IProduct> => {
-                    self.products = response.data;
+                .then((response: Array<IProduct>): Array<IProduct> => {
+                    self.products = response;
                     return self.products;
                 });
         }
@@ -76,5 +76,5 @@ namespace app.menu {
 
     angular
         .module('pizzaweb.menu')
-        .controller('menu', MenuController);
+        .controller('Menu', MenuController);
 }
